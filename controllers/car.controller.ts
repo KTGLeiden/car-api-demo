@@ -60,7 +60,10 @@ export const addCar = (req: Request, res: Response) => {
 /** Delete a car */
 export const deleteCar = (req: Request, res: Response) => {
     const id = Number(req.params.id);
-    const car = _cars.filter(car => car.id !== id);
+    const carIndex = _cars.findIndex(car => car.id === id);
+    if (carIndex !== -1) {
+        _cars.splice(carIndex, 1);
+    }
     res.send();
 };
 
@@ -69,4 +72,15 @@ export const getCar = (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const car = _cars.find(car => car.id === id);
     res.send(car);
+};
+
+/** get a specific car */
+export const updateCar = (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    const newCar: Car = req.body;
+    const carIndex = _cars.findIndex(car => car.id === id);
+    if (carIndex !== -1) {
+        _cars[carIndex] = newCar;
+    }
+    res.send();
 };
