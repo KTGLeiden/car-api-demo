@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { Car } from '../models/car.model';
-let currentId = 2;
 const _cars: Car[] = [
     {
         id: 1,
@@ -38,6 +37,7 @@ const _cars: Car[] = [
         color: 'Black'
     }
 ];
+let currentId = _cars.reduce((maxId: number, car: Car) => (car.id > maxId ? car.id : maxId), 0) + 1;
 
 //Simple version, without validation or sanitation
 export const test = (req: Request, res: Response) => {
