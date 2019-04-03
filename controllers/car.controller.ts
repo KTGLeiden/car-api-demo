@@ -44,6 +44,11 @@ export const test = (req: Request, res: Response) => {
     res.send('Greetings from the Test controller!');
 };
 
+//Simple version, without validation or sanitation
+export const count = (req: Request, res: Response) => {
+    res.send(_cars.length.toString());
+};
+
 /** all cars */
 export const cars = (req: Request, res: Response) => {
     res.send(_cars);
